@@ -2,23 +2,31 @@
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
         public MainPage()
         {
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object? sender, EventArgs e)
+        private void OnLoginClicked(object? sender, EventArgs e)
         {
-            count++;
+            var user = UserEntry.Text ?? string.Empty;
+            var pass = PasswordEntry.Text ?? string.Empty;
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
+            if (user == "Potts" && pass == "Password1")
+            {
+                MessageLabel.Text = $"Login successful {user}";
+            }
             else
-                CounterBtn.Text = $"Clicked {count} times";
+            {
+                MessageLabel.Text = $"Login failed {user}";
+            }
+        }
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+        private void OnCancelClicked(object? sender, EventArgs e)
+        {
+            UserEntry.Text = string.Empty;
+            PasswordEntry.Text = string.Empty;
+            MessageLabel.Text = string.Empty;
         }
     }
 }
